@@ -22,7 +22,7 @@
 
         .card {
             background: white;
-            padding: 40px 50px;
+            padding: 36px 44px;
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
@@ -31,44 +31,48 @@
 
         h1 {
             color: #ff4d6d;
-            margin-bottom: 30px;
-            font-size: 2.4rem;
+            margin-bottom: 28px;
+            font-size: 2.2rem;
         }
 
         .buttons {
             position: relative;
-            height: 80px;
-            width: 260px;
+            width: 240px;
+            height: 70px;
             margin: auto;
         }
 
         button {
-            padding: 12px 30px;
-            font-size: 1.2rem;
+            font-size: 1.05rem;          /* smaller text */
+            padding: 10px 24px;          /* smaller buttons */
             border: none;
-            border-radius: 30px;
+            border-radius: 28px;
             cursor: pointer;
-            position: absolute;
-            transition: left 0.15s ease, top 0.15s ease;
             white-space: nowrap;
         }
 
         #yesBtn {
             background: #ff4d6d;
             color: white;
+            position: absolute;
             left: 0;
         }
 
         #noBtn {
             background: #adb5bd;
             color: white;
-            right: 0;
+            position: fixed;             /* 🔒 fixed from start */
+            width: 96px;                 /* 🔒 locked size */
+            height: 40px;
+            right: 50%;
+            top: 50%;
+            transform: translate(120px, 40px);
+            transition: left 0.15s ease, top 0.15s ease;
         }
 
         canvas {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             pointer-events: none;
             z-index: 1;
         }
@@ -83,12 +87,14 @@
 
     <div class="buttons">
         <button id="yesBtn">Yes ❤️</button>
-        <button id="noBtn">No 💔</button>
+        <!-- NO button is outside layout control but visually aligned -->
     </div>
 </div>
 
+<button id="noBtn">No 💔</button>
+
 <script>
-    // ---------- NO BUTTON LOGIC ----------
+    // ---------- NO BUTTON MOVEMENT (NO RESIZE EVER) ----------
     const noBtn = document.getElementById("noBtn");
 
     function moveNoButton() {
@@ -98,7 +104,6 @@
         const x = Math.random() * maxX;
         const y = Math.random() * maxY;
 
-        noBtn.style.position = "fixed";
         noBtn.style.left = `${x}px`;
         noBtn.style.top = `${y}px`;
     }
@@ -113,19 +118,22 @@
     const canvas = document.getElementById("fireworks");
     const ctx = canvas.getContext("2d");
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
 
     let particles = [];
 
     function createFirework(x, y) {
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 90; i++) {
             particles.push({
                 x,
                 y,
                 angle: Math.random() * Math.PI * 2,
                 speed: Math.random() * 6 + 2,
-                life: 100,
+                life: 90,
                 color: `hsl(${Math.random() * 360}, 100%, 60%)`
             });
         }
@@ -149,7 +157,6 @@
 
         requestAnimationFrame(animate);
     }
-
     animate();
 
     // ---------- YES BUTTON ----------
@@ -168,10 +175,7 @@
         yesBtn.innerText = "YAY!!! 💕";
     });
 
-    window.addEventListener("resize", () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
+    window.addEventListener("resize", resizeCanvas);
 </script>
 
 </body>
