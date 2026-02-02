@@ -1,82 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Be My Valentine ❤️</title>
+<meta charset="UTF-8">
+<title>Be My Valentine ❤️</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-        body {
-            margin: 0;
-            height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Segoe UI', sans-serif;
-            overflow: hidden;
-        }
+    body {
+        margin: 0;
+        height: 100vh;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
+    }
 
-        .card {
-            background: white;
-            padding: 36px 44px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            z-index: 2;
-        }
+    .card {
+        background: white;
+        padding: 36px 44px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        position: relative;
+        z-index: 2;
+    }
 
-        h1 {
-            color: #ff4d6d;
-            margin-bottom: 28px;
-            font-size: 2.2rem;
-        }
+    h1 {
+        color: #ff4d6d;
+        margin-bottom: 26px;
+        font-size: 2.2rem;
+    }
 
-        .buttons {
-            position: relative;
-            width: 240px;
-            height: 70px;
-            margin: auto;
-        }
+    .buttons {
+        position: relative;
+        width: 240px;
+        height: 70px;
+        margin: auto;
+    }
 
-        button {
-            font-size: 1.05rem;          /* smaller text */
-            padding: 10px 24px;          /* smaller buttons */
-            border: none;
-            border-radius: 28px;
-            cursor: pointer;
-            white-space: nowrap;
-        }
+    button {
+        font-size: 1.05rem;     /* smaller buttons */
+        padding: 10px 24px;
+        border: none;
+        border-radius: 28px;
+        cursor: pointer;
+        white-space: nowrap;
+    }
 
-        #yesBtn {
-            background: #ff4d6d;
-            color: white;
-            position: absolute;
-            left: 0;
-        }
+    #yesBtn {
+        background: #ff4d6d;
+        color: white;
+        position: absolute;
+        left: 0;
+    }
 
-        #noBtn {
-            background: #adb5bd;
-            color: white;
-            position: fixed;             /* 🔒 fixed from start */
-            width: 96px;                 /* 🔒 locked size */
-            height: 40px;
-            right: 50%;
-            top: 50%;
-            transform: translate(120px, 40px);
-            transition: left 0.15s ease, top 0.15s ease;
-        }
+    #noBtn {
+        background: #adb5bd;
+        color: white;
+        position: absolute;    /* 🔒 stays absolute always */
+        right: 0;
+        width: 96px;           /* 🔒 locked size */
+        height: 40px;
+        transition: left 0.15s ease, top 0.15s ease;
+    }
 
-        canvas {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-    </style>
+    canvas {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+    }
+</style>
 </head>
 <body>
 
@@ -84,22 +83,22 @@
 
 <div class="card">
     <h1>Will you be my Valentine? 💖</h1>
-
     <div class="buttons">
         <button id="yesBtn">Yes ❤️</button>
-        <!-- NO button is outside layout control but visually aligned -->
+        <button id="noBtn">No 💔</button>
     </div>
 </div>
 
-<button id="noBtn">No 💔</button>
-
 <script>
-    // ---------- NO BUTTON MOVEMENT (NO RESIZE EVER) ----------
     const noBtn = document.getElementById("noBtn");
+    const container = document.querySelector(".card");
 
+    // Move NO button but keep size + positioning context
     function moveNoButton() {
-        const maxX = window.innerWidth - noBtn.offsetWidth;
-        const maxY = window.innerHeight - noBtn.offsetHeight;
+        const padding = 10;
+
+        const maxX = container.offsetWidth - noBtn.offsetWidth - padding;
+        const maxY = container.offsetHeight - noBtn.offsetHeight - padding;
 
         const x = Math.random() * maxX;
         const y = Math.random() * maxY;
