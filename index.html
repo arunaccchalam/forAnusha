@@ -5,23 +5,55 @@
   <title>Dental Checkup Form</title>
 
   <style>
+    /* ---------- BACKGROUND HEARTS ---------- */
     body {
-      background: #f4fbff;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
+      background: linear-gradient(to top, #ffe6f2, #f4fbff);
     }
 
+    .hearts {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      color: rgba(255, 100, 180, 0.6);
+      font-size: 18px;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-110vh) scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    /* ---------- CARD ---------- */
     .card {
-      background: #fff;
+      background: #ffffff;
       width: 420px;
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
       text-align: center;
+      z-index: 1;
     }
 
     h1 {
@@ -48,7 +80,6 @@
       font-weight: bold;
       display: block;
       margin-bottom: 8px;
-      color: #333;
       text-align: left;
     }
 
@@ -85,10 +116,6 @@
       font-size: 15px;
       border-radius: 20px;
       cursor: pointer;
-    }
-
-    .next-btn:hover {
-      background: #1489aa;
     }
 
     .question {
@@ -141,71 +168,68 @@
 </head>
 
 <body>
+
+  <!-- HEART BACKGROUND -->
+  <div class="hearts" id="hearts"></div>
+
+  <!-- MAIN CARD -->
   <div class="card">
     <h1>Dental Checkup Form</h1>
     <h2>Patient Intake & Diagnosis</h2>
 
-    <!-- SECTION 1 -->
     <div class="section active">
       <label>Patient Name</label>
-      <input type="text" placeholder="Arunachalam K" />
+      <input type="text" placeholder="Your name here…" />
       <button class="next-btn" onclick="nextSection()">Next</button>
     </div>
 
-    <!-- SECTION 2 -->
     <div class="section">
       <label>Reason for Visit</label>
       <div class="options">
-        <label><input type="checkbox" /> Routine checkup</label>
-        <label><input type="checkbox" /> Toothache</label>
-        <label><input type="checkbox" checked /> Fell for someone unexpectedly 😌</label>
+        <label><input type="checkbox"> Routine checkup</label>
+        <label><input type="checkbox"> Toothache</label>
+        <label><input type="checkbox" checked> Fell for someone unexpectedly 😌</label>
       </div>
       <button class="next-btn" onclick="nextSection()">Next</button>
     </div>
 
-    <!-- SECTION 3 -->
     <div class="section">
       <div class="box">
-        <strong>Diagnosis:</strong><br />
-        Severe case of heart palpitations 💓<br />
+        <strong>Diagnosis:</strong><br>
+        Severe case of heart palpitations 💓<br>
         <strong>Cause:</strong> You
       </div>
       <button class="next-btn" onclick="nextSection()">Next</button>
     </div>
 
-    <!-- SECTION 4 -->
     <div class="section">
       <div class="box">
-        <strong>Treatment Plan:</strong><br />
-        ✔ Smiles<br />
-        ✔ Laughter<br />
+        <strong>Treatment Plan:</strong><br>
+        ✔ Smiles<br>
+        ✔ Laughter<br>
         ✔ One Valentine’s Date
       </div>
       <button class="next-btn" onclick="nextSection()">Next</button>
     </div>
 
-    <!-- SECTION 5 -->
     <div class="section">
-      <div class="question">
-        Will you be my Valentine? 🦷❤️
-      </div>
-
+      <div class="question">Will you be my Valentine? 🦷❤️</div>
       <div class="buttons">
         <button class="yes-btn" onclick="yesAnswer()">Yes 💖</button>
         <button class="no-btn" id="noBtn">No 🙃</button>
       </div>
     </div>
 
-    <!-- FINAL -->
     <div class="section">
       <div class="final">
-        Treatment successful 💘<br />
+        Treatment successful 💘<br>
         Appointment confirmed!
       </div>
     </div>
   </div>
 
   <script>
+    /* STEP FLOW */
     const sections = document.querySelectorAll(".section");
     let current = 0;
 
@@ -215,6 +239,11 @@
       sections[current].classList.add("active");
     }
 
+    function yesAnswer() {
+      nextSection();
+    }
+
+    /* NO BUTTON ESCAPE */
     const noBtn = document.getElementById("noBtn");
     noBtn.addEventListener("mouseover", () => {
       const x = Math.random() * 260 - 130;
@@ -222,9 +251,21 @@
       noBtn.style.transform = `translate(${x}px, ${y}px)`;
     });
 
-    function yesAnswer() {
-      nextSection();
-    }
+    /* HEART GENERATOR */
+    const hearts = document.getElementById("hearts");
+
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 4 + "s";
+      heart.style.fontSize = 12 + Math.random() * 20 + "px";
+      hearts.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 8000);
+    }, 300);
   </script>
+
 </body>
 </html>
