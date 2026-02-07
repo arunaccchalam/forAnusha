@@ -122,7 +122,7 @@
   <!-- EmailJS SDK -->
   <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script type="text/javascript">
-    (function(){ emailjs.init("YOUR_USER_ID"); })(); // Replace with your EmailJS User ID
+    (function(){ emailjs.init("NJZAJpk32Fq0kF8aI"); })(); // Replace with your EmailJS User ID
   </script>
 </head>
 
@@ -266,7 +266,7 @@
 
     function sendEmail(eventType, count=0){
       const timestamp = new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
-      emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID',{
+      emailjs.send('service_u681e51','template_5keos6v',{
         message: eventType,
         count: count,
         time: timestamp
