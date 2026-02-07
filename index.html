@@ -2,25 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Dental Valentine Form</title>
+  <title>Dental Checkup Form</title>
+
   <style>
-    /* ---------- BACKGROUND HEARTS ---------- */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
     body {
       margin: 0;
       height: 100vh;
       overflow: hidden;
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       background: linear-gradient(to top, #ffe6f2, #f4fbff);
     }
 
+    /* HEARTS */
     .hearts {
       position: fixed;
       width: 100%;
       height: 100%;
-      overflow: hidden;
       z-index: 0;
       pointer-events: none;
     }
@@ -28,271 +30,283 @@
     .heart {
       position: absolute;
       bottom: -20px;
-      color: rgba(255, 100, 180, 0.6);
-      font-size: 18px;
+      font-size: 16px;
+      opacity: 0.6;
       animation: floatUp linear infinite;
     }
 
     @keyframes floatUp {
-      from { transform: translateY(0) scale(1); opacity: 1; }
-      to { transform: translateY(-110vh) scale(1.4); opacity: 0; }
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-110vh); opacity: 0; }
     }
 
-    /* ---------- CARD ---------- */
+    /* CARD */
     .card {
-      background: #ffffff;
-      width: 450px;
-      padding: 25px;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      background: #fff;
+      width: 440px;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
       text-align: center;
       z-index: 1;
-      position: relative;
     }
 
-    h1 { color: #e84fa9; margin-bottom: 5px; }
-    h2 { font-size: 16px; color: #777; margin-bottom: 20px; }
+    h1 {
+      color: #ff5fa2;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
 
-    .section { display: none; animation: fadeIn 0.4s ease; }
-    .section.active { display: block; }
+    h2 {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
 
-    label { font-weight: bold; display: block; margin-bottom: 8px; text-align: left; }
-    input[type="text"] { width: 100%; padding: 8px; border-radius: 8px; border: 1px solid #ccc; margin-bottom: 20px; }
+    .section {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
 
-    .options label { display: block; text-align: left; margin: 8px 0; cursor: pointer; font-weight: normal; }
+    .section.active {
+      display: block;
+    }
 
-    .box { background: #e9f8ff; padding: 12px; border-radius: 10px; margin-bottom: 15px; color: #005f7a; text-align: left; }
+    label {
+      font-weight: 500;
+      display: block;
+      margin: 15px 0 5px;
+      text-align: left;
+    }
+
+    .name-box h2 {
+      margin: 5px 0 15px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    .options label {
+      display: block;
+      text-align: left;
+      margin: 8px 0;
+      font-weight: 400;
+    }
+
+    .box {
+      background: #fff0f7;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      color: #b1005a;
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.6;
+    }
 
     .next-btn {
-      background: #ff8fcf;
+      background: #ff5fa2;
       color: #fff;
       border: none;
-      padding: 10px 22px;
-      font-size: 15px;
-      border-radius: 20px;
+      padding: 10px 26px;
+      font-size: 14px;
+      border-radius: 25px;
       cursor: pointer;
+    }
+
+    .next-btn:hover {
+      background: #ff3f92;
+    }
+
+    .question {
+      font-size: 20px;
+      font-weight: 600;
+      color: #ff3f92;
+      margin-bottom: 15px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
       margin-top: 10px;
     }
 
-    .question { font-size: 20px; font-weight: bold; color: #e84fa9; margin-bottom: 10px; }
-
-    .buttons { position: relative; height: 120px; margin-top: 10px; }
     .yes-btn, .no-btn {
-      position: absolute;
-      padding: 10px 20px;
-      border-radius: 20px;
+      padding: 10px 22px;
+      border-radius: 22px;
       border: none;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
     }
-    .yes-btn { background: #ff8fcf; color: #fff; left: 50%; transform: translateX(-120%); }
-    .no-btn { background: #6fd3ff; color: #000; left: 50%; transform: translateX(20%); }
 
-    .final { font-size: 22px; color: #ff4fa3; font-weight: bold; }
-
-    .teeth {
-      position: absolute;
-      font-size: 24px;
-      animation: floatTeeth 1s ease-out forwards;
-      pointer-events: none;
+    .yes-btn {
+      background: #ff5fa2;
+      color: #fff;
     }
 
-    @keyframes floatTeeth {
-      0% { opacity: 0; transform: translateY(0) scale(0.5); }
-      50% { opacity: 1; transform: translateY(-30px) scale(1); }
-      100% { opacity: 0; transform: translateY(-60px) scale(1.2); }
+    .no-btn {
+      background: #ffd1e6;
+      color: #333;
     }
 
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-    .confetti {
-      position: absolute;
-      font-size: 24px;
-      animation: floatConfetti 2s ease-out forwards;
-      pointer-events: none;
+    .final {
+      font-size: 22px;
+      color: #ff3f92;
+      font-weight: 600;
     }
 
-    @keyframes floatConfetti {
-      0% { opacity: 1; transform: translateY(0) rotate(0deg); }
-      100% { opacity: 0; transform: translateY(-200px) rotate(360deg); }
+    .error {
+      color: #b00040;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
+    .error h3 {
+      color: #ff3f92;
+      margin-bottom: 10px;
+    }
+
+    .error img {
+      width: 150px;
+      margin: 15px 0;
+      border-radius: 12px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
-
-  <!-- EmailJS SDK -->
-  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){ emailjs.init("NJZAJpk32Fq0kF8aI"); })(); // Replace with your EmailJS User ID
-  </script>
 </head>
 
 <body>
 
-  <!-- HEART BACKGROUND -->
-  <div class="hearts" id="hearts"></div>
+<div class="hearts" id="hearts"></div>
 
-  <!-- MAIN CARD -->
-  <div class="card">
-    <h1>Dental Checkup Form</h1>
-    <h2>Patient Intake & Diagnosis</h2>
+<div class="card">
+  <h1>Dental Checkup Form</h1>
+  <h2>Patient Intake & Diagnosis</h2>
 
-    <div class="section active">
-      <label>Patient Name</label>
-      <h2>Arunachalam K</h2>
-      <label>Consultant</label>
-      <h2>Anusha S</h2>
-      <button class="next-btn" onclick="nextSection()">Open Case</button>
-    </div>
-
-    <div class="section">
-      <label>Reason for Visit</label>
-      <div class="options">
-        <label><input type="checkbox"> Routine checkup</label>
-        <label><input type="checkbox"> Toothache</label>
-        <label><input type="checkbox" checked> Fell for someone unexpectedly 😌</label>
-      </div>
-      <button class="next-btn" onclick="nextSection()">Review Symptoms</button>
-    </div>
-
-    <div class="section">
-      <div class="box">
-        <strong>Diagnosis:</strong><br>
-        ✔ Severe case of heart palpitations 💓<br>
-        ✔ Loss of Sleep<br>
-        ✔ Thinking of you all day<br>
-        <strong>Cause:</strong> You
-      </div>
-      <button class="next-btn" onclick="nextSection()">Assessment</button>
-    </div>
-
-    <div class="section">
-      <div class="box">
-        <strong>Treatment Plan:</strong><br>
-        ✔ Smiles<br>
-        ✔ Laughter<br>
-        ✔ One Valentine’s Date Together
-      </div>
-      <button class="next-btn" onclick="nextSection()">Final Recommendation</button>
-    </div>
-
-    <div class="section">
-      <div class="question">Will you be my Valentine? 🦷❤️</div>
-      <div class="buttons">
-        <button class="yes-btn" onclick="trackYes()">Yes 💖</button>
-        <button class="no-btn" onclick="trackNo()">No 🙃</button>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="final">
-        Treatment successful 💘<br>
-        Appointment confirmed!
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="final" style="color:red;">
-        Error 404: Option Not Found<br>
-        Action forbidden.<br>
-        Wait! Your medical license doesn’t cover rejection of this patient.<br>
-        Look how sad he is 😢
-        <br><img src="https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif" width="150">
-        <br>Please reconsider the correct medical procedure.
-        <br><button class="next-btn" onclick="backToValentine()">Try Again 💖</button>
-      </div>
-    </div>
-
+  <!-- SECTION 1 -->
+  <div class="section active">
+    <label>Patient Name</label>
+    <div class="name-box"><h2>Arunachalam K</h2></div>
+    <label>Consultant</label>
+    <div class="name-box"><h2>Anusha S</h2></div>
+    <button class="next-btn" onclick="nextSection()">Open Case</button>
   </div>
 
-  <script>
-    // ---------- HEARTS ----------
-    const hearts = document.getElementById("hearts");
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 4 + Math.random() * 4 + "s";
-      heart.style.fontSize = 12 + Math.random() * 20 + "px";
-      hearts.appendChild(heart);
-      setTimeout(() => heart.remove(), 8000);
-    }, 300);
+  <!-- SECTION 2 -->
+  <div class="section">
+    <label>Reason for Visit</label>
+    <div class="options">
+      <label><input type="checkbox"> Routine checkup</label>
+      <label><input type="checkbox"> Toothache</label>
+      <label><input type="checkbox" checked> Fell for someone unexpectedly 😌</label>
+    </div>
+    <button class="next-btn" onclick="nextSection()">Review Symptoms</button>
+  </div>
 
-    // ---------- SECTIONS ----------
-    const sections = document.querySelectorAll(".section");
-    let current = 0;
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="box">
+      <strong>Diagnosis:</strong><br>
+      ✔ Severe heart palpitations 💓<br>
+      ✔ Loss of sleep<br>
+      ✔ Thinking of you all day<br>
+      <strong>Cause:</strong> You
+    </div>
+    <button class="next-btn" onclick="nextSection()">Assessment</button>
+  </div>
 
-    function nextSection() {
-      sections[current].classList.remove("active");
-      current++;
-      sections[current].classList.add("active");
-      showTeeth();
-    }
+  <!-- SECTION 4 -->
+  <div class="section">
+    <div class="box">
+      <strong>Treatment Plan:</strong><br>
+      ✔ Smiles<br>
+      ✔ Laughter<br>
+      ✔ One Valentine’s Date Together
+    </div>
+    <button class="next-btn" onclick="nextSection()">Final Recommendation</button>
+  </div>
 
-    function backToValentine() {
-      sections[current].classList.remove("active");
-      current = sections.length - 2; // go back to Valentine question
-      sections[current].classList.add("active");
-    }
+  <!-- SECTION 5 -->
+  <div class="section">
+    <div class="question">Will you be my Valentine? 🦷❤️</div>
+    <div class="buttons">
+      <button class="yes-btn" onclick="yesAnswer()">Yes 💖</button>
+      <button class="no-btn" onclick="goToError()">No 🙃</button>
+    </div>
+  </div>
 
-    // ---------- TEETH ANIMATION ----------
-    function showTeeth() {
-      const tooth = document.createElement("div");
-      tooth.className = "teeth";
-      tooth.innerHTML = "🦷";
-      tooth.style.left = Math.random() * 80 + "%";
-      tooth.style.top = "60%";
-      document.querySelector(".card").appendChild(tooth);
-      setTimeout(() => tooth.remove(), 1200);
-    }
+  <!-- ERROR SECTION -->
+  <div class="section" id="errorSection">
+    <div class="error">
+      <h3>Error 404: Option Not Found</h3>
+      Action forbidden.<br><br>
+      Your medical license doesn’t cover rejection of this specific patient.
+      <br><br>
+      Look how sad he is 😔
+      <br>
+      <img src="https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif" alt="sad gif">
+      <br>
+      Please reconsider the correct medical procedure.
+    </div>
 
-    // ---------- CONFETTI FOR YES ----------
-    function showConfetti() {
-      for(let i=0;i<20;i++){
-        const c = document.createElement("div");
-        c.className = "confetti";
-        c.innerHTML = ["💖","💘","❤️"][Math.floor(Math.random()*3)];
-        c.style.left = Math.random()*90 + "%";
-        c.style.top = "50%";
-        document.querySelector(".card").appendChild(c);
-        setTimeout(()=>c.remove(),2000);
-      }
-    }
+    <div class="question">Will you be my Valentine?</div>
+    <div class="buttons">
+      <button class="yes-btn" onclick="finalYes()">Yes 💖</button>
+      <button class="no-btn" onclick="stayHere()">No 🙃</button>
+    </div>
+  </div>
 
-    // ---------- EMAILJS LOGGING ----------
-    let noClicks = 0;
-    let openedCount = 0;
-    let yesClicked = false;
+  <!-- FINAL -->
+  <div class="section">
+    <div class="final">I love you too 💘</div>
+  </div>
+</div>
 
-    function sendEmail(eventType, count=0){
-      const timestamp = new Date().toLocaleString("en-IN",{timeZone:"Asia/Kolkata"});
-      emailjs.send('service_u681e51','template_5keos6v',{
-        message: eventType,
-        count: count,
-        time: timestamp
-      }).then(response=>console.log("Email sent!"), error=>console.error(error));
-    }
+<script>
+  const sections = document.querySelectorAll(".section");
+  let current = 0;
 
-    // Track page open
-    openedCount++;
-    sendEmail("Form Opened", openedCount);
+  function nextSection() {
+    sections[current].classList.remove("active");
+    current++;
+    sections[current].classList.add("active");
+  }
 
-    function trackNo(){
-      noClicks++;
-      sendEmail("No Clicked", noClicks);
-      // Go to error section
-      sections[current].classList.remove("active");
-      current = sections.length - 1; // error section
-      sections[current].classList.add("active");
-    }
+  function yesAnswer() {
+    nextSection();
+  }
 
-    function trackYes(){
-      yesClicked = true;
-      sendEmail("Yes Clicked");
-      showConfetti();
-      nextSection();
-    }
+  function goToError() {
+    sections[current].classList.remove("active");
+    document.getElementById("errorSection").classList.add("active");
+  }
 
-  </script>
+  function stayHere() {
+    // do nothing 😈
+  }
+
+  function finalYes() {
+    document.getElementById("errorSection").classList.remove("active");
+    sections[sections.length - 1].classList.add("active");
+  }
+
+  /* HEARTS */
+  const hearts = document.getElementById("hearts");
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = 4 + Math.random() * 4 + "s";
+    hearts.appendChild(h);
+    setTimeout(() => h.remove(), 8000);
+  }, 300);
+</script>
+
 </body>
 </html>
