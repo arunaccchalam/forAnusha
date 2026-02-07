@@ -15,77 +15,93 @@
       margin: 0;
     }
 
-    .form-card {
-      background: #ffffff;
+    .card {
+      background: #fff;
       width: 420px;
       padding: 25px;
       border-radius: 15px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
       color: #1da1c7;
       margin-bottom: 5px;
     }
 
     h2 {
-      text-align: center;
       font-size: 16px;
       color: #777;
       margin-bottom: 20px;
     }
 
+    .section {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
     label {
       font-weight: bold;
       display: block;
-      margin-top: 15px;
+      margin-bottom: 8px;
       color: #333;
+      text-align: left;
     }
 
     input[type="text"] {
       width: 100%;
       padding: 8px;
-      margin-top: 5px;
       border-radius: 8px;
       border: 1px solid #ccc;
+      margin-bottom: 20px;
     }
 
-    .checkbox-group {
-      margin-top: 8px;
-    }
-
-    .checkbox-group label {
-      font-weight: normal;
+    .options label {
       display: block;
-      margin-top: 5px;
+      text-align: left;
+      margin: 8px 0;
       cursor: pointer;
+      font-weight: normal;
     }
 
-    .diagnosis {
+    .box {
       background: #e9f8ff;
       padding: 12px;
       border-radius: 10px;
-      margin-top: 15px;
+      margin-bottom: 15px;
       color: #005f7a;
+      text-align: left;
     }
 
-    .hidden {
-      display: none;
+    .next-btn {
+      background: #1da1c7;
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      font-size: 15px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .next-btn:hover {
+      background: #1489aa;
     }
 
     .question {
-      text-align: center;
       font-size: 20px;
       font-weight: bold;
-      margin-top: 20px;
       color: #e84fa9;
+      margin-bottom: 10px;
     }
 
     .buttons {
       position: relative;
       height: 120px;
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
     .yes-btn, .no-btn {
@@ -112,61 +128,94 @@
     }
 
     .final {
-      text-align: center;
       font-size: 22px;
       color: #ff4fa3;
       font-weight: bold;
-      margin-top: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 
 <body>
-  <div class="form-card">
+  <div class="card">
     <h1>Dental Checkup Form</h1>
     <h2>Patient Intake & Diagnosis</h2>
 
-    <label>Patient Name</label>
-    <input type="text" placeholder="Your name here…" />
-
-    <label>Reason for Visit</label>
-    <div class="checkbox-group">
-      <label><input type="checkbox" /> Routine checkup</label>
-      <label><input type="checkbox" /> Toothache</label>
-      <label><input type="checkbox" checked /> Fell for someone unexpectedly 😌</label>
+    <!-- SECTION 1 -->
+    <div class="section active">
+      <label>Patient Name</label>
+      <input type="text" placeholder="Arunachalam K" />
+      <button class="next-btn" onclick="nextSection()">Next</button>
     </div>
 
-    <div class="diagnosis">
-      <strong>Diagnosis:</strong><br />
-      Severe case of heart palpitations 💓<br />
-      <strong>Cause:</strong> You
+    <!-- SECTION 2 -->
+    <div class="section">
+      <label>Reason for Visit</label>
+      <div class="options">
+        <label><input type="checkbox" /> Routine checkup</label>
+        <label><input type="checkbox" /> Toothache</label>
+        <label><input type="checkbox" checked /> Fell for someone unexpectedly 😌</label>
+      </div>
+      <button class="next-btn" onclick="nextSection()">Next</button>
     </div>
 
-    <div class="diagnosis">
-      <strong>Treatment Plan:</strong><br />
-      ✔ Smiles<br />
-      ✔ Laughter<br />
-      ✔ One Valentine’s Date
+    <!-- SECTION 3 -->
+    <div class="section">
+      <div class="box">
+        <strong>Diagnosis:</strong><br />
+        Severe case of heart palpitations 💓<br />
+        <strong>Cause:</strong> You
+      </div>
+      <button class="next-btn" onclick="nextSection()">Next</button>
     </div>
 
-    <div class="question">
-      Will you be my Valentine? 🦷❤️
+    <!-- SECTION 4 -->
+    <div class="section">
+      <div class="box">
+        <strong>Treatment Plan:</strong><br />
+        ✔ Smiles<br />
+        ✔ Laughter<br />
+        ✔ One Valentine’s Date
+      </div>
+      <button class="next-btn" onclick="nextSection()">Next</button>
     </div>
 
-    <div class="buttons">
-      <button class="yes-btn" onclick="yesAnswer()">Yes 💖</button>
-      <button class="no-btn" id="noBtn">No 🙃</button>
+    <!-- SECTION 5 -->
+    <div class="section">
+      <div class="question">
+        Will you be my Valentine? 🦷❤️
+      </div>
+
+      <div class="buttons">
+        <button class="yes-btn" onclick="yesAnswer()">Yes 💖</button>
+        <button class="no-btn" id="noBtn">No 🙃</button>
+      </div>
     </div>
 
-    <div class="final hidden" id="finalMessage">
-      Treatment successful 💘<br />
-      Appointment confirmed!
+    <!-- FINAL -->
+    <div class="section">
+      <div class="final">
+        Treatment successful 💘<br />
+        Appointment confirmed!
+      </div>
     </div>
   </div>
 
   <script>
-    const noBtn = document.getElementById("noBtn");
+    const sections = document.querySelectorAll(".section");
+    let current = 0;
 
+    function nextSection() {
+      sections[current].classList.remove("active");
+      current++;
+      sections[current].classList.add("active");
+    }
+
+    const noBtn = document.getElementById("noBtn");
     noBtn.addEventListener("mouseover", () => {
       const x = Math.random() * 260 - 130;
       const y = Math.random() * 80 - 40;
@@ -174,8 +223,7 @@
     });
 
     function yesAnswer() {
-      document.querySelector(".buttons").style.display = "none";
-      document.getElementById("finalMessage").classList.remove("hidden");
+      nextSection();
     }
   </script>
 </body>
