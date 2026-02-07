@@ -3,10 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <title>X-Ray Analysis</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
 
+  <style>
+    body {
+      background: #0e0e0e;
+      font-family: Arial, sans-serif;
+      color: #e6f7ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 400px;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #7fdfff;
+      margin-bottom: 15px;
+    }
+
+    .xray {
+      width: 100%;
+      border: 2px solid #7fdfff;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .btn {
+      background: #7fdfff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #a6ebff;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+
+    .question {
+      margin-top: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff9edb;
+    }
+
+    .buttons {
+      margin-top: 25px;
+      position: relative;
+      height: 120px;
+    }
+
+    .yes-btn, .no-btn {
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 20px;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    .yes-btn {
+      background: #ff9edb;
+      left: 50%;
+      transform: translateX(-120%);
+    }
+
+    .no-btn {
+      background: #7fdfff;
+      left: 50%;
+      transform: translateX(20%);
+    }
+
+    .final-message {
+      margin-top: 25px;
+      font-size: 22px;
+      color: #ff9edb;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
   <div class="container">
     <h1>Dental X-Ray Analysis</h1>
 
@@ -14,23 +108,47 @@
       src="https://i.imgur.com/9z6xZQk.png"
       alt="Dental X-Ray"
       class="xray"
-      id="xrayImage"
     />
+
+    <button class="btn" onclick="reveal()">Analyze X-Ray</button>
 
     <p class="hidden message" id="message">
       I looked deep… and my heart says it’s you 💘
     </p>
 
-    <button onclick="reveal()" class="btn">
-      Analyze X-Ray
-    </button>
-
     <p class="hidden question" id="question">
       Will you be my Valentine? 🦷❤️
     </p>
+
+    <div class="hidden buttons" id="buttons">
+      <button class="yes-btn" onclick="yesAnswer()">Yes 💖</button>
+      <button class="no-btn" id="noBtn">No 🙃</button>
+    </div>
+
+    <p class="hidden final-message" id="finalMessage">
+      Appointment confirmed 💘 See you on Valentine’s Day!
+    </p>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    function reveal() {
+      document.getElementById("message").style.display = "block";
+      document.getElementById("question").style.display = "block";
+      document.getElementById("buttons").style.display = "block";
+    }
+
+    const noBtn = document.getElementById("noBtn");
+
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * 260 - 130;
+      const y = Math.random() * 100 - 50;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    function yesAnswer() {
+      document.getElementById("buttons").style.display = "none";
+      document.getElementById("finalMessage").style.display = "block";
+    }
+  </script>
 </body>
 </html>
-
